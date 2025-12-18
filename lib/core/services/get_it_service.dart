@@ -1,0 +1,12 @@
+
+
+import 'package:banking_app/core/services/api.dart';
+import 'package:get_it/get_it.dart';
+
+final GetIt getIt = GetIt.instance;
+
+void setupLocator() {
+  // Core Services
+  getIt.registerSingleton<Api>(Api());
+  
+}
