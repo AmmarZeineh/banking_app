@@ -26,14 +26,14 @@ class UserDropdownField extends StatelessWidget {
         Text('المستخدم *', style: AppTextStyles.w600_14),
         SizedBox(height: 8.h),
         DropdownButtonFormField<User>(
-          value: selectedUser,
+          initialValue: selectedUser,
           decoration: _inputDecoration('اختر المستخدم'),
           isExpanded: true,
           items: users.map((user) {
             return DropdownMenuItem<User>(
               value: user,
               child: Text(
-                '${user.name} - ID: ${user.id}',
+                '${user.name} - ID: ${user.nationalId}',
                 style: AppTextStyles.w400_14,
                 overflow: TextOverflow.ellipsis,
               ),

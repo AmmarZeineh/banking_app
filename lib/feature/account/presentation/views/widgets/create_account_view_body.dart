@@ -8,6 +8,7 @@ import 'package:banking_app/core/widgets/custom_text_form_field.dart';
 import 'package:banking_app/core/widgets/dashboard_sidebar.dart';
 import 'package:banking_app/feature/account/domain/entities/create_account_params.dart';
 import 'package:banking_app/feature/account/presentation/cubits/create_account_cubit/create_account_cubit.dart';
+import 'package:banking_app/feature/account/presentation/cubits/fetch_users_for_create_account_cubit/fetch_users_for_create_account_cubit.dart';
 import 'package:banking_app/feature/account/presentation/views/widgets/create_account_header.dart';
 import 'package:banking_app/feature/account/presentation/views/widgets/user_dropdown.dart';
 import 'package:banking_app/feature/account/presentation/views/widgets/user_info_card.dart';
@@ -42,34 +43,6 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
   ];
   final List<String> _currencies = ['USD', 'EUR', 'GBP', 'SAR', 'AED'];
 
-  // قائمة المستخدمين (في التطبيق الحقيقي، يجب جلبها من API)
-  final List<User> _users = [
-    User(
-      id: 3,
-      name: 'أحمد محمد',
-      email: 'ahmed@example.com',
-      nationalId: '1234567890',
-      isEmailVerified: true,
-      roleId: 1,
-    ),
-    User(
-      id: 2,
-      name: 'فاطمة علي',
-      email: 'fatima@example.com',
-      nationalId: '0987654321',
-      isEmailVerified: true,
-      roleId: 2,
-    ),
-    User(
-      id: 3,
-      name: 'محمود حسن',
-      email: 'mahmoud@example.com',
-      nationalId: '1122334455',
-      isEmailVerified: false,
-      roleId: 1,
-    ),
-  ];
-
   @override
   void dispose() {
     _currencyController.dispose();
@@ -91,6 +64,12 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
     _parentAccountIdController.clear();
     _accountLabelController.clear();
     _interestRateController.clear();
+  }
+
+  @override
+  void initState() {
+    context.read<FetchUsersForCreateAccountCubit>().fetchUsers();
+    super.initState();
   }
 
   @override
@@ -144,19 +123,46 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                                 SizedBox(height: 24.h),
 
                                 // User Dropdown
-                                UserDropdownField(
-                                  selectedUser: _selectedUser,
-                                  users: _users,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedUser = value;
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (value == null) {
-                                      return 'هذا الحقل مطلوب';
+                                BlocBuilder<
+                                  FetchUsersForCreateAccountCubit,
+                                  FetchUsersForCreateAccountState
+                                >(
+                                  builder: (context, state) {
+                                    if (state
+                                        is FetchUsersForCreateAccountLoading) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    } else if (state
+                                        is FetchUsersForCreateAccountSuccess) {
+                                      return UserDropdownField(
+                                        selectedUser: _selectedUser,
+                                        users: state.usersList,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _selectedUser = value;
+                                          });
+                                        },
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'هذا الحقل مطلوب';
+                                          }
+                                          return null;
+                                        },
+                                      );
                                     }
-                                    return null;
+                                    return Center(
+                                      child: CustomElevatedButton(
+                                        title: 'اعد المحاولة',
+                                        onPressed: () async {
+                                          await context
+                                              .read<
+                                                FetchUsersForCreateAccountCubit
+                                              >()
+                                              .fetchUsers();
+                                        },
+                                      ),
+                                    );
                                   },
                                 ),
 
@@ -265,23 +271,7 @@ class _CreateAccountViewBodyState extends State<CreateAccountViewBody> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20.h),
 
-                                // Parent Account ID (Optional)
-                                CustomTextFormField(
-                                  controller: _parentAccountIdController,
-                                  label: 'معرف الحساب الأب (اختياري)',
-                                  hint: 'أدخل معرف الحساب الأب',
-                                  keyboardType: TextInputType.number,
-                                  validator: (value) {
-                                    if (value != null && value.isNotEmpty) {
-                                      if (int.tryParse(value) == null) {
-                                        return 'يجب إدخال رقم صحيح';
-                                      }
-                                    }
-                                    return null;
-                                  },
-                                ),
                                 SizedBox(height: 32.h),
 
                                 // Buttons
