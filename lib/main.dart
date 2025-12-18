@@ -18,11 +18,11 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseMessaging.onBackgroundMessage(
-    NotificationService.firebaseMessaginhBackgroundHandler,
-  );
+  // FirebaseMessaging.onBackgroundMessage(
+  //   NotificationService.firebaseMessaginhBackgroundHandler,
+  // );
 
-  await NotificationService.initializeNotification();
+  // await NotificationService.initializeNotification();
   setupLocator();
   await Prefs.init();
   Bloc.observer = CustomBlocObserver();
