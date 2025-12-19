@@ -26,7 +26,7 @@ class UserModel {
       id: json['id'],
       name: json['name'],
       email: json['email'],
-      nationalId: json['nationalID'],
+      nationalId: json['nationalID'] ?? '0',
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
       isEmailVerified: json['isEmailVerified'],
