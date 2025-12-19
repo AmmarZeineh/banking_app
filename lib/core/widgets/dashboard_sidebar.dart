@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DashboardSidebar extends StatelessWidget {
-  const DashboardSidebar({super.key});
+  final int currentIndex;
+  final Function(int) onPageChanged;
+
+  const DashboardSidebar({
+    super.key,
+    required this.currentIndex,
+    required this.onPageChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +29,18 @@ class DashboardSidebar extends StatelessWidget {
             ),
           ),
           Divider(color: Colors.white24),
-          _buildSidebarItem(Icons.dashboard, 'Dashboard', true),
-          _buildSidebarItem(Icons.account_balance, 'Accounts', false),
-          _buildSidebarItem(Icons.people, 'Users', false),
-          _buildSidebarItem(Icons.settings, 'Settings', false),
+          _buildSidebarItem(Icons.dashboard, 'Dashboard', 0),
+          _buildSidebarItem(Icons.account_balance, 'Accounts', 1),
+          _buildSidebarItem(Icons.people, 'Users', 2),
+          _buildSidebarItem(Icons.settings, 'Settings', 3),
         ],
       ),
     );
   }
 
-  Widget _buildSidebarItem(IconData icon, String title, bool isActive) {
+  Widget _buildSidebarItem(IconData icon, String title, int index) {
+    bool isActive = currentIndex == index;
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
       decoration: BoxDecoration(
@@ -45,6 +54,8 @@ class DashboardSidebar extends StatelessWidget {
           style: AppTextStyles.w500_14.copyWith(color: Colors.white),
         ),
         dense: true,
+        onTap: () => onPageChanged(index),
+        hoverColor: Colors.white.withOpacity(0.05),
       ),
     );
   }

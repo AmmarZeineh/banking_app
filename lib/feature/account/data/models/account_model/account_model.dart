@@ -1,4 +1,5 @@
 import 'package:banking_app/core/models/user_model.dart';
+import 'package:banking_app/feature/account/domain/entities/account_entity.dart';
 import 'package:banking_app/feature/account/domain/entities/create_account_params.dart';
 
 import 'parent_account_model.dart';
@@ -106,4 +107,18 @@ class AccountModel {
     'accountLabel': accountLabel,
     'interestRate': interestRate,
   };
+
+  Account toEntity() => Account(
+    id: id!,
+    accountType: accountType!,
+    accountNumber: accountNumber!,
+    balance: balance!,
+    isComposite: isComposite!,
+    currency: currency!,
+    overdraftLimit: overdraftLimit!,
+    interestRate: interestRate ?? 0,
+    accountLabel: accountLabel!,
+    user: user!.toEntity(),
+    subAccounts: subAccounts!.map((e) => e.toEntity()).toList(),
+  );
 }

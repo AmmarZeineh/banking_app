@@ -4,6 +4,7 @@ import 'package:banking_app/core/errors/failure.dart';
 import 'package:banking_app/core/models/user_model.dart';
 import 'package:banking_app/core/services/api.dart';
 import 'package:banking_app/feature/account/data/models/account_model/account_model.dart';
+import 'package:banking_app/feature/account/domain/entities/account_entity.dart';
 import 'package:banking_app/feature/account/domain/entities/create_account_params.dart';
 import 'package:banking_app/feature/account/domain/repo/account_repo.dart';
 import 'package:dartz/dartz.dart';
@@ -40,6 +41,23 @@ class AccountRepoImpl implements AccountRepo {
           .toList();
 
       return Right(users);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Account>>> fetchAccounts() async {
+    try {
+      final response = await _api.get(url: '$baseUrl/account?skip=0&limit=10');
+      List<Account> accounts = [];
+
+      for (var i = 0; i < response['data'].length; i++) {
+        if (response['data'][i]['isComposite']) {
+          accounts.add(AccountModel.fromJson(response['data'][i]).toEntity());
+        }
+      }
+      return Right(accounts);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }

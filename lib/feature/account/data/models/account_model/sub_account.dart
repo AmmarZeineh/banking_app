@@ -1,3 +1,5 @@
+import 'package:banking_app/feature/account/domain/entities/subaccount_entity.dart';
+
 class SubAccountModel {
   int? id;
   String? accountNumber;
@@ -65,4 +67,15 @@ class SubAccountModel {
     'createdAt': createdAt?.toIso8601String(),
     'updatedAt': updatedAt?.toIso8601String(),
   };
+
+  SubAccount toEntity() => SubAccount(
+    id: id!,
+    accountNumber: accountNumber!,
+    accountLabel: accountLabel!,
+    accountType: accountType!,
+    balance: balance!,
+    currency: currency!,
+    isComposite: isComposite!,
+    parentAccountId: parentAccountId!,
+  );
 }
