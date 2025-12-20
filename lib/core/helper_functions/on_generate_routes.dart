@@ -5,6 +5,7 @@ import 'package:banking_app/feature/account/presentation/views/create_account_vi
 import 'package:banking_app/feature/users/presentation/views/create_user_view.dart';
 import 'package:banking_app/feature/users/presentation/views/user_details_view.dart';
 import 'package:banking_app/feature/users/presentation/views/users_view.dart';
+import 'package:banking_app/feature/auth/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> onGenerateRoutes(RouteSettings settings) {
@@ -20,6 +21,9 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => UserDetailsView(user: user));
     case CreateAccountView.routeName:
       return MaterialPageRoute(builder: (_) => const CreateAccountView());
+    case LoginView.routeName:
+      return MaterialPageRoute(builder: (_) => const LoginView());
+
     case CreateUserView.routeName:
       return MaterialPageRoute(builder: (_) => const CreateUserView());
     default:
