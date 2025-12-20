@@ -32,7 +32,7 @@ class DashboardSidebar extends StatelessWidget {
           _buildSidebarItem(Icons.dashboard, 'Dashboard', 0),
           _buildSidebarItem(Icons.account_balance, 'Accounts', 1),
           _buildSidebarItem(Icons.people, 'Users', 2),
-          _buildSidebarItem(Icons.settings, 'Settings', 3),
+          _buildSidebarItem(Icons.people, 'Create User', 3),
         ],
       ),
     );

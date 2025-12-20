@@ -1,5 +1,5 @@
 import 'package:banking_app/core/services/get_it_service.dart';
-import 'package:banking_app/feature/users/domain/users_repo.dart';
+import 'package:banking_app/feature/users/domain/repos/users_repo.dart';
 import 'package:banking_app/feature/users/presentation/cubits/fetch_users_cubit/fetch_users_cubit.dart';
 import 'package:banking_app/feature/users/presentation/views/widgets/users_view_body.dart';
 import 'package:flutter/material.dart';

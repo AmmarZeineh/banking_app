@@ -1,5 +1,5 @@
 import 'package:banking_app/core/entities/user_entity.dart';
-import 'package:banking_app/feature/users/domain/users_repo.dart';
+import 'package:banking_app/feature/users/domain/repos/users_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

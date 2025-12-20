@@ -3,7 +3,8 @@ import 'package:banking_app/core/entities/user_entity.dart';
 import 'package:banking_app/core/errors/failure.dart';
 import 'package:banking_app/core/models/user_model.dart';
 import 'package:banking_app/core/services/api.dart';
-import 'package:banking_app/feature/users/domain/users_repo.dart';
+import 'package:banking_app/feature/users/domain/entities/create_user_params.dart';
+import 'package:banking_app/feature/users/domain/repos/users_repo.dart';
 import 'package:dartz/dartz.dart';
 
 class UsersRepoImpl implements UsersRepo {
@@ -31,6 +32,18 @@ class UsersRepoImpl implements UsersRepo {
   Future<Either<Failure, void>> deleteUser(String id) async {
     try {
       await _api.delete(url: '$baseUrl/user/$id');
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> createUser(
+    CreateUserParams createUserParams,
+  ) async {
+    try {
+      await _api.post(url: '$baseUrl/user', body: createUserParams.toJson());
       return const Right(null);
     } catch (e) {
       return Left(ServerFailure(e.toString()));

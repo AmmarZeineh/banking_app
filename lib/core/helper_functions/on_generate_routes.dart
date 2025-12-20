@@ -2,6 +2,7 @@ import 'package:banking_app/core/entities/user_entity.dart';
 import 'package:banking_app/core/widgets/main_layout.dart';
 import 'package:banking_app/feature/account/presentation/views/accounts_view.dart';
 import 'package:banking_app/feature/account/presentation/views/create_account_view.dart';
+import 'package:banking_app/feature/users/presentation/views/create_user_view.dart';
 import 'package:banking_app/feature/users/presentation/views/user_details_view.dart';
 import 'package:banking_app/feature/users/presentation/views/users_view.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => UserDetailsView(user: user));
     case CreateAccountView.routeName:
       return MaterialPageRoute(builder: (_) => const CreateAccountView());
+    case CreateUserView.routeName:
+      return MaterialPageRoute(builder: (_) => const CreateUserView());
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
   }

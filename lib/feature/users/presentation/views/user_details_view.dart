@@ -1,7 +1,7 @@
 import 'package:banking_app/core/entities/user_entity.dart';
 import 'package:banking_app/core/helper_functions/snack_bars.dart';
 import 'package:banking_app/core/services/get_it_service.dart';
-import 'package:banking_app/feature/users/domain/users_repo.dart';
+import 'package:banking_app/feature/users/domain/repos/users_repo.dart';
 import 'package:banking_app/feature/users/presentation/cubits/delete_user_cubit/delete_user_cubit.dart';
 import 'package:banking_app/feature/users/presentation/cubits/fetch_users_cubit/fetch_users_cubit.dart';
 import 'package:flutter/material.dart';
