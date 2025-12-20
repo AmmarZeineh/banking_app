@@ -2,9 +2,8 @@ import 'package:banking_app/core/helper_functions/on_generate_routes.dart';
 import 'package:banking_app/core/services/custom_bloc_observer.dart';
 import 'package:banking_app/core/services/get_it_service.dart';
 import 'package:banking_app/core/services/shared_preference_singletone.dart';
+import 'package:banking_app/core/widgets/main_layout.dart';
 import 'package:banking_app/feature/auth/presentation/views/login_view.dart';
-import 'package:banking_app/feature/notification/domain/repos/notification_repo.dart';
-import 'package:banking_app/feature/notification/presentation/cubits/fetch_notification_cubit/fetch_notification_cubit.dart';
 import 'package:banking_app/firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,22 +39,14 @@ class BankingApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) =>
-              FetchNotificationCubit(getIt.get<NotificationRepo>()),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'cairo',
-          scaffoldBackgroundColor: Colors.white,
-        ),
-        onGenerateRoute: onGenerateRoutes,
-        initialRoute: LoginView.routeName,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'cairo',
+        scaffoldBackgroundColor: Colors.white,
       ),
+      onGenerateRoute: onGenerateRoutes,
+      initialRoute: LoginView.routeName,
     );
   }
 }

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:banking_app/core/helper_functions/snack_bars.dart';
 import 'package:banking_app/core/services/get_it_service.dart';
+import 'package:banking_app/core/widgets/main_layout.dart';
+import 'package:banking_app/feature/account/presentation/views/create_account_view.dart';
 import 'package:banking_app/feature/auth/domain/repos/auth_repo.dart';
 import 'package:banking_app/feature/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:banking_app/feature/auth/presentation/views/widgets/login_view_body.dart';
@@ -39,7 +41,7 @@ class LoginViewConsumer extends StatelessWidget {
         } else if (state is LoginSuccess) {
           showSuccessMessage('Success', context);
           log("success");
-          Navigator.pushNamed(context, Test.routeName);
+          Navigator.pushNamed(context, MainLayout.routeName);
         }
       },
       builder: (context, state) {

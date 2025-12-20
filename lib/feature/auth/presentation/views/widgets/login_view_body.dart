@@ -93,17 +93,39 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     ),
                     child: Column(
                       children: [
-                        CustomFormTextField(
-                          title: 'البريد الإلكتروني',
-                          textInputType: TextInputType.emailAddress,
-                          onSaved: (value) => email = value,
+                        CustomTextFormField(
+                          controller: TextEditingController(),
+                          label: 'البريد الإلكتروني',
+                          hint: 'أدخل بريدك الإلكتروني',
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال البريد الإلكتروني';
+                            }
+                            if (!value.contains('@')) {
+                              return 'الرجاء إدخال بريد إلكتروني صحيح';
+                            }
+                            email = value;
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 20),
-                        CustomFormTextField(
-                          title: 'كلمة المرور',
-                          textInputType: TextInputType.visiblePassword,
+                        CustomTextFormField(
                           obscureText: true,
-                          onSaved: (value) => password = value,
+                          controller: TextEditingController(),
+                          label: 'كلمة المرور',
+                          hint: 'أدخل كلمة المرور',
+                          keyboardType: TextInputType.visiblePassword,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'الرجاء إدخال كلمة المرور';
+                            }
+                            if (value.length < 6) {
+                              return 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
+                            }
+                            password = value;
+                            return null;
+                          },
                         ),
 
                         // نسيت كلمة المرور
