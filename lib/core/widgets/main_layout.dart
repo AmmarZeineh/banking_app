@@ -1,6 +1,7 @@
 import 'package:banking_app/core/widgets/dashboard_sidebar.dart';
 import 'package:banking_app/feature/account/presentation/views/accounts_view.dart';
 import 'package:banking_app/feature/account/presentation/views/create_account_view.dart';
+import 'package:banking_app/feature/transaction/presentation/views/create_transaction_view.dart';
 import 'package:banking_app/feature/users/presentation/views/users_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class _MainLayoutState extends State<MainLayout> {
     CreateAccountView(),
     AccountsView(),
     UsersView(),
+    CreateTransactionView(),
   ];
 
   @override
