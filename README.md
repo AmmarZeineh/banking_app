@@ -1,16 +1,38 @@
-# banking_app
+# Banking App — Notifications Module
 
-A new Flutter project.
+A Flutter module that handles **push and in-app notifications** for a banking app. It receives Firebase Cloud
+Messaging pushes, shows them as local notifications while the app is in the foreground, and lists them in a
+notifications screen backed by a REST API.
 
-## Getting Started
+![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white)
+![Firebase](https://img.shields.io/badge/Push-FCM-FFCA28?logo=firebase&logoColor=black)
 
-This project is a starting point for a Flutter application.
+## What's built
 
-A few resources to get you started if this is your first Flutter project:
+- FCM setup for foreground, background and terminated states
+- Local notifications with `flutter_local_notifications`
+- Notifications screen with Cubit state and Dio-based API calls
+- Arabic and English with `easy_localization`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Architecture
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Clean Architecture for the `notification` feature (data / domain / presentation), `get_it` for DI,
+`dartz` `Either` for errors.
+
+## Tech stack
+
+Flutter · flutter_bloc · get_it · Dio · dartz · Firebase Messaging · flutter_local_notifications · easy_localization
+
+## Getting started
+
+```bash
+flutter pub get
+flutter run
+```
+
+Requires a Firebase project configured with `flutterfire configure`.
+
+## Author
+
+**Ammar Zeineh**, Flutter Developer · [LinkedIn](https://linkedin.com/in/ammar-zeineh) · [GitHub](https://github.com/AmmarZeineh)
